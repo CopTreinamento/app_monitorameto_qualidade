@@ -8,18 +8,18 @@
 </head>
 <body>
     <div class="category">
-        <h3>Faltas</h3>
+        <h3>Metas</h3>
         <div class="buttons cat1">
             <button class="cat1">TMA</button>
-            <button class="cat1">TM</button>
-            <button class="cat1">Bot3</button>
+            <button class="cat1">TME</button>
         </div>
     </div>
     <div class="category">
         <h3>Omissões</h3>
         <div class="buttons cat2">
-            <button class="cat2">Omitiu saudação inicial</button>
-            <button class="cat2">Omitiu mensagem de agradecimento</button>
+            <button class="cat2">Omitiu saudação</button>
+            <button class="cat2">Omitiu agradecimento</button>
+            <button class="cat2">Omitiu confirmação de região saturada para o técnico</button>
             <button class="cat2">Omitiu "algo mais?"</button>
         </div>
     </div>
@@ -28,16 +28,34 @@
         <div class="buttons cat3">
             <button class="cat3">Ignorou script técnico</button>
             <button class="cat3">Ignorou RG ass</button>
-            <button class="cat3">Ignorou Contrato ass</button>    
+            <button class="cat3">Ignorou contrato ass</button>    
+            <button class="cat3">Ignorou procuração</button>
+            <button class="cat3">Ignorou doc. titular</button>
+            <button class="cat3">Ignorou doc. menor</button>
             <button class="cat3">Ignorou MAC</button>
-            <button class="cat3">Ignorou pwr Metter</button>
-            <button class="cat3">Ignorou teste</button>
+            <button class="cat3">Ignorou pwrMetter</button>
+            <button class="cat3">Ignorou teste veloc.</button>
+            <button class="cat3">Ignorou teste veloc. atual</button>
             <button class="cat3">Ignorou video chamando</button>
-            <button class="cat3">Ignorou</button>
         </div>
     </div>
-
-    <textarea id="output" rows="4" cols="50"></textarea>
+    <div class="category">
+        <h3>Ajustes</h3>
+        <div class="buttons cat4">
+            <button class="cat3">Saudação incompleta</button>   
+            <button class="cat3">Evidencia ilegivel</button>
+            <button class="cat3">Evidências Desatualizadas</button>  
+            <button class="cat3">Evidências sem TimeStamp</button> 
+            <button class="cat3">Modulação divergente</button>
+            <button class="cat3">Assinaturas divergentes: DocumentoxContrato</button>   
+            <button class="cat3">Técnico não chama no video</button>  
+         </div>
+    </div>
+    
+    <div>
+    <!-- <h3>Output</h3> -->
+    <textarea id="output" rows="1" cols="50"></textarea>
+    </div>
 
     <div class="action-buttons">
         <button id="copyButton">Copiar</button>
