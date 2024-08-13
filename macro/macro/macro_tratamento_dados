@@ -1,6 +1,7 @@
 /** @OnlyCurrentDoc */
 
-function clear_columns() {
+function a_clear_columns() {
+  clear_sheet();
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.getRange('B:F').activate();
   spreadsheet.getActiveSheet().deleteColumns(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
@@ -14,7 +15,7 @@ function clear_columns() {
   spreadsheet.getActiveSheet().deleteColumns(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
 };
 
-function add_tme_tma() {
+function b_add_tme_tma() {
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.getRange('D:D').activate();
   spreadsheet.getActiveSheet().insertColumnsAfter(spreadsheet.getActiveRange().getLastColumn(), 1);
@@ -45,7 +46,7 @@ function add_tme_tma() {
   spreadsheet.getRange('J3').activate();
 };
 
-function change_col_order() {
+function c_change_col_order() {
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.getRange('A:A').activate();
   spreadsheet.getActiveSheet().insertColumnsBefore(spreadsheet.getActiveRange().getColumn(), 1);
@@ -53,4 +54,32 @@ function change_col_order() {
   spreadsheet.getRange('D:D').moveTo(spreadsheet.getActiveRange());
   spreadsheet.getRange('D:D').activate();
   spreadsheet.getActiveSheet().deleteColumns(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
+};
+
+function d_add_filter() {
+  remove_filter();
+  var spreadsheet = SpreadsheetApp.getActive();
+  var sheet = spreadsheet.getActiveSheet();
+  sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns()).activate();
+  sheet = spreadsheet.getActiveSheet();
+  sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns()).createFilter();
+  spreadsheet.getRange('A1:J1').activate();
+  spreadsheet.getActiveRangeList().setBackground('#0b5394')
+  .setFontColor('#ffffff');
+  spreadsheet.getRange('A1').activate();
+  spreadsheet.getActiveSheet().getFilter().sort(1, true);
+};
+
+function remove_filter() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  var sheet = spreadsheet.getActiveSheet();
+  sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns()).activate();
+  spreadsheet.getActiveSheet().getFilter().remove();
+};
+
+function clear_sheet() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  var sheet = spreadsheet.getActiveSheet();
+  sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns()).activate();
+  spreadsheet.getActiveRangeList().clear({contentsOnly: true, skipFilteredRows: true});
 };
