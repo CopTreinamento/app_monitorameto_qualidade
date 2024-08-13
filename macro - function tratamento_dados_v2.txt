@@ -1,0 +1,56 @@
+/** @OnlyCurrentDoc */
+
+function clear_columns() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('B:F').activate();
+  spreadsheet.getActiveSheet().deleteColumns(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
+  spreadsheet.getRange('C:D').activate();
+  spreadsheet.getActiveSheet().deleteColumns(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
+  spreadsheet.getRange('E:F').activate();
+  spreadsheet.getActiveSheet().deleteColumns(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
+  spreadsheet.getRange('G:H').activate();
+  spreadsheet.getActiveSheet().deleteColumns(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
+  spreadsheet.getRange('G:Z').activate();
+  spreadsheet.getActiveSheet().deleteColumns(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
+};
+
+function add_tme_tma() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('D:D').activate();
+  spreadsheet.getActiveSheet().insertColumnsAfter(spreadsheet.getActiveRange().getLastColumn(), 1);
+  spreadsheet.getActiveRange().offset(0, spreadsheet.getActiveRange().getNumColumns(), spreadsheet.getActiveRange().getNumRows(), 1).activate();
+  spreadsheet.getRange('D2').activate();
+  var currentCell = spreadsheet.getCurrentCell();
+  spreadsheet.getSelection().getNextDataRange(SpreadsheetApp.Direction.DOWN).activate();
+  currentCell.activateAsCurrentCell();
+  spreadsheet.getRange('D2:D21777').splitTextToColumns();
+  spreadsheet.getRange('H1').activate();
+  spreadsheet.getCurrentCell().setValue('00:00:30');
+  spreadsheet.getRange('I1').activate();
+  spreadsheet.getCurrentCell().setValue('00:07:00');
+  spreadsheet.getRange('C:C').activate();
+  spreadsheet.getActiveSheet().insertColumnsAfter(spreadsheet.getActiveRange().getLastColumn(), 1);
+  spreadsheet.getActiveRange().offset(0, spreadsheet.getActiveRange().getNumColumns(), spreadsheet.getActiveRange().getNumRows(), 1).activate();
+  spreadsheet.getRange('C2').activate();
+  currentCell = spreadsheet.getCurrentCell();
+  spreadsheet.getSelection().getNextDataRange(SpreadsheetApp.Direction.DOWN).activate();
+  currentCell.activateAsCurrentCell();
+  spreadsheet.getRange('C2:C21777').splitTextToColumns();
+  spreadsheet.getRange('I2').activate();
+  spreadsheet.getCurrentCell().setFormula('=IF((F2-D2)>$I$1;"TME";"")');
+  spreadsheet.getActiveRange().autoFill(spreadsheet.getRange('I2:I21777'), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
+  spreadsheet.getRange('J2').activate();
+  spreadsheet.getCurrentCell().setFormula('=IF(G2>$J$1;"TMA";"")');
+  spreadsheet.getActiveRange().autoFill(spreadsheet.getRange('J2:J21777'), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
+  spreadsheet.getRange('J3').activate();
+};
+
+function change_col_order() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('A:A').activate();
+  spreadsheet.getActiveSheet().insertColumnsBefore(spreadsheet.getActiveRange().getColumn(), 1);
+  spreadsheet.getActiveRange().offset(0, 0, spreadsheet.getActiveRange().getNumRows(), 1).activate();
+  spreadsheet.getRange('D:D').moveTo(spreadsheet.getActiveRange());
+  spreadsheet.getRange('D:D').activate();
+  spreadsheet.getActiveSheet().deleteColumns(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
+};
