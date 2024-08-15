@@ -5,7 +5,8 @@ function tratamento_dados(){
   _add_tme_tma();
   _change_col_order();
   _add_filter();
- 
+  _fix_values_tme_tme();
+
 };
 
 
@@ -91,4 +92,14 @@ function _clear_sheet() {
   var sheet = spreadsheet.getActiveSheet();
   sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns()).activate();
   spreadsheet.getActiveRangeList().clear({contentsOnly: true, skipFilteredRows: true});
+};
+
+
+function _fix_values_tme_tme() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('I2:J2').activate();
+  var currentCell = spreadsheet.getCurrentCell();
+  spreadsheet.getSelection().getNextDataRange(SpreadsheetApp.Direction.DOWN).activate();
+  currentCell.activateAsCurrentCell();
+  spreadsheet.getRange('I2:J2610').copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
 };
