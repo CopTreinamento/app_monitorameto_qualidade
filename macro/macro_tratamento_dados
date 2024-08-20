@@ -6,7 +6,7 @@ function tratamento_dados(){
   _change_col_order();
   _add_filter();
   _fix_values_tme_tme();
-
+  _sort_cols_1_4();
 };
 
 
@@ -76,8 +76,6 @@ function _add_filter() {
   spreadsheet.getRange('A1:J1').activate();
   spreadsheet.getActiveRangeList().setBackground('#0b5394')
   .setFontColor('#ffffff');
-  spreadsheet.getRange('A1').activate();
-  spreadsheet.getActiveSheet().getFilter().sort(1, true);
 };
 
 function _remove_filter() {
@@ -102,4 +100,19 @@ function _fix_values_tme_tme() {
   spreadsheet.getSelection().getNextDataRange(SpreadsheetApp.Direction.DOWN).activate();
   currentCell.activateAsCurrentCell();
   spreadsheet.getRange('I2:J2610').copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+};
+
+function apagar_prot_selec() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('B13:AF15').activate();
+  spreadsheet.getActiveRangeList().clear({contentsOnly: true, skipFilteredRows: true});
+};
+
+
+function _sort_cols_1_4() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('D1').activate();
+  spreadsheet.getActiveSheet().getFilter().sort(4, true);
+  spreadsheet.getRange('A1').activate();
+  spreadsheet.getActiveSheet().getFilter().sort(1, true);
 };
