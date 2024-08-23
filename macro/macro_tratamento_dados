@@ -7,6 +7,8 @@ function tratamento_dados(){
   _add_filter();
   _fix_values_tme_tme();
   _sort_cols_1_4();
+  _clear_prot_select();
+  _copy_imported_protos();
 };
 
 
@@ -115,4 +117,23 @@ function _sort_cols_1_4() {
   spreadsheet.getActiveSheet().getFilter().sort(4, true);
   spreadsheet.getRange('A1').activate();
   spreadsheet.getActiveSheet().getFilter().sort(1, true);
+};
+
+
+function _clear_prot_select(){
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('F25').activate();
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('prot_selec.'), true);
+  spreadsheet.getRange('A:J').activate();
+  spreadsheet.getActiveRangeList().clear({contentsOnly: true, skipFilteredRows: true});
+};
+
+function _copy_imported_protos(){
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('C5').activate();
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('importacao_dados'), true);
+  spreadsheet.getRange('A:J').activate();
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('prot_selec.'), true);
+  spreadsheet.getRange('A:J').activate();
+  spreadsheet.getRange('importacao_dados!A:J').copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_NORMAL, false);
 };
