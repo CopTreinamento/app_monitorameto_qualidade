@@ -9,6 +9,7 @@ function tratamento_dados(){
   _sort_cols_1_4();
   _clear_prot_select();
   _copy_imported_protos();
+  _clear_random_prot();
 };
 
 
@@ -104,11 +105,11 @@ function _fix_values_tme_tme() {
   spreadsheet.getRange('I2:J2610').copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
 };
 
-function apagar_prot_selec() {
+/* function clear_random_prot() {
   var spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.getRange('B13:AF15').activate();
   spreadsheet.getActiveRangeList().clear({contentsOnly: true, skipFilteredRows: true});
-};
+};*/
 
 
 function _sort_cols_1_4() {
@@ -136,4 +137,11 @@ function _copy_imported_protos(){
   spreadsheet.setActiveSheet(spreadsheet.getSheetByName('prot_selec.'), true);
   spreadsheet.getRange('A:J').activate();
   spreadsheet.getRange('importacao_dados!A:J').copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_NORMAL, false);
+};
+
+function _clear_random_prot() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('prot_rand_selection'), true);
+  spreadsheet.getRange('B13:AF15').activate();
+  spreadsheet.getActiveRangeList().clear({contentsOnly: true, skipFilteredRows: true});
 };
