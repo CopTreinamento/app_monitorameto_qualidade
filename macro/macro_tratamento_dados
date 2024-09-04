@@ -136,7 +136,7 @@ function _copy_imported_protos(){
   spreadsheet.getRange('A:J').activate();
   spreadsheet.setActiveSheet(spreadsheet.getSheetByName('prot_selec.'), true);
   spreadsheet.getRange('A:J').activate();
-  spreadsheet.getRange('importacao_dados!A:J').copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_NORMAL, false);
+  spreadsheet.getRange('importacao_dados!A:J').copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
 };
 
 function _clear_random_prot() {
