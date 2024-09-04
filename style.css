@@ -1,6 +1,6 @@
 /* Estilos para o corpo e categorias permanecem os mesmos */
 body {
-    background-color: #430A5D;
+    background-color: #395B64;
     color: #EEE4B1;
     font-family: Arial, sans-serif;
 }
@@ -12,7 +12,7 @@ body {
 .category h3 {
     margin-top: 7px;
     margin-bottom: 2px;
-    color: rgba(100,180,200,255);
+    color: #A5D7E8;
     font-size: 12pt;
 /*     background-color:white; */
 }
@@ -26,7 +26,7 @@ body {
 button {
     flex: 1 1 calc(33.333% - 10px); /* Permite até 3 botões por linha */
     min-width: 50px; /* Largura mínima dos botões */
-    background-color: #5F374B;
+    background-color: #E7F6F2;
     color: #EEE4B1;
     border: 1px solid #EEE4B1;
     padding: 6.5px;
@@ -56,13 +56,6 @@ button {
 
 }
 
-.cat2 button.selected:nth-child(2) {
-    background-color: #82d1ff; /* Tom mais claro */
-}
-
-.cat2 button.selected:nth-child(3) {
-    background-color: #52bcff; /* Tom mais escuro */
-}
 
 /* Categoria 3 */
 .cat3 button.selected {
@@ -71,13 +64,6 @@ button {
 
 }
 
-.cat3 button.selected:nth-child(2) {
-    background-color: #a8ff82; /* Tom mais claro */
-}
-
-.cat3 button.selected:nth-child(3) {
-    background-color: #80ff52; /* Tom mais escuro */
-}
 
 /* Nova Categoria (Cat 4) */
 .cat4 button.selected {
@@ -86,22 +72,15 @@ button {
     /*font-weight: bold;*/
 }
 
-.cat4 button.selected:nth-child(2) {
-    background-color: #ffe699; /* Tom mais claro */
-}
-
-.cat4 button.selected:nth-child(3) {
-    background-color: #ffcc33; /* Tom mais escuro */
-}
 
 /* Estilos para output e botões de ação permanecem os mesmos */
 #output {
     width: 100%;
     margin-top: 12px;
     box-sizing: border-box; /* Para incluir padding e bordas no cálculo da largura */
-    background-color: #5F374B;
-    color: #EEE4B1;
-    border: 1px solid #EEE4B1;
+    background-color: #133535;
+/*    color: #191e1f; */
+    border: 1px solid #3a556d;
     padding: 5px;
 }
 
@@ -112,7 +91,7 @@ button {
 }
 
 #copyButton {
-    background-color: #a8ff82; /* Verde pastel */
+    background-color: #383838; /* Verde pastel */
     color: #000000; /* Texto preto */
     border: none;
     padding: 10px;
@@ -120,7 +99,8 @@ button {
 }
 
 #cutButton {
-    background-color: #f8c471; /* Amarelo pastel */
+    /* background-color: #f8c471; */ /* Amarelo pastel */
+    background-color: #202020;
     color: #000000; /* Texto preto */
     border: none;
     padding: 10px;
@@ -128,8 +108,9 @@ button {
 }
 
 #clearButton {
-    background-color: #ff8a75; /* Vermelho pastel */
-    color: #000000; /* Texto preto */
+    /* background-color: #ff8a75;*/ /* Vermelho pastel */
+    background-color: black;
+    /* color: black;*/ /* Texto preto */
     border: none;
     padding: 10px;
     cursor: pointer;
