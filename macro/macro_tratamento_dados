@@ -1,5 +1,3 @@
-/** @OnlyCurrentDoc */
-
 function tratamento_dados(){
   _clear_columns();
   _add_tme_tma();
@@ -7,9 +5,11 @@ function tratamento_dados(){
   _add_filter();
   _fix_values_tme_tme();
   _sort_cols_1_4();
+  _add_TE_values();
   _clear_prot_select();
   _copy_imported_protos();
   _clear_random_prot();
+  _add_TE_values();
 };
 
 
@@ -144,4 +144,27 @@ function _clear_random_prot() {
   spreadsheet.setActiveSheet(spreadsheet.getSheetByName('prot_rand_selection'), true);
   spreadsheet.getRange('B13:AF15').activate();
   spreadsheet.getActiveRangeList().clear({contentsOnly: true, skipFilteredRows: true});
+};
+
+function _add_TE_values(){
+  _add_TE_col();
+  _calc_TE_values();
+}
+
+function _add_TE_col() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('J:J').activate();
+  spreadsheet.getActiveSheet().insertColumnsAfter(spreadsheet.getActiveRange().getLastColumn(), 1);
+  spreadsheet.getActiveRange().offset(0, spreadsheet.getActiveRange().getNumColumns(), spreadsheet.getActiveRange().getNumRows(), 1).activate();
+  };
+
+function _calc_TE_values() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('K2').activate();
+  spreadsheet.getCurrentCell().setFormula('=F2-D2');
+  spreadsheet.getRange('K3').activate();
+  var currentCell = spreadsheet.getCurrentCell();
+  spreadsheet.getSelection().getNextDataRange(SpreadsheetApp.Direction.DOWN).activate();
+  currentCell.activateAsCurrentCell();
+  spreadsheet.getRange('K2').copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_NORMAL, false);
 };
