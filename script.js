@@ -52,7 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
     cutButton.style.backgroundColor = currentTheme.actionButtonBackground;
     clearButton.style.backgroundColor = currentTheme.actionButtonBackground;
 
-    
+  }
+
+  
   // Função de recortar com reaplicação de tema
   cutButton.addEventListener('click', function () {
     output.select();
