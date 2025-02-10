@@ -1,141 +1,112 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const buttons = document.querySelectorAll("button:not(#copyButton):not(#clearButton):not(#cutButton):not(#theme1Button):not(#theme2Button)");
-    const output = document.getElementById("output");
-    const copyButton = document.getElementById("copyButton");
-    const cutButton = document.getElementById("cutButton");
-    const clearButton = document.getElementById("clearButton");
-    const theme1Button = document.getElementById("theme1Button");
-    const theme2Button = document.getElementById("theme2Button");
-    const themeButtons = [theme1Button, theme2Button]; // Array para os botões de tema
-    let clickedButtons = [];
+document.addEventListener('DOMContentLoaded', function () {
+  const buttons = document.querySelectorAll(
+    'button:not(#copyButton):not(#clearButton):not(#cutButton)'
+  );
+  const output = document.getElementById('output');
+  const copyButton = document.getElementById('copyButton');
+  const cutButton = document.getElementById('cutButton');
+  const clearButton = document.getElementById('clearButton');
+  const theme2Button = document.getElementById('theme2Button');
+  let clickedButtons = [];
 
-    // Definição de temas
-    const themes = {
-        tema1: {
-            bodyBackground: '#395B64',
-            textColor: '#EEE4B1',
-            buttonBackground: '#E7F6F2',
-            buttonTextColor: '#EEE4B1',
-            selectedButtonBackground: ['#ff6f61', '#ff8a75', '#ff5047'],
-            outputBackground: '#133535',
-            actionButtonBackground: '#383838',
-            themeButtonBackground: '#6D9CA8', // Cor de fundo para botões de tema
-            themeButtonTextColor: '#EEE4B1'   // Cor do texto para botões de tema
-        },
-        tema2: {
-            bodyBackground: '#1E1E1E',
-            textColor: '#FFFFFF',
-            buttonBackground: '#333333',
-            buttonTextColor: '#FFFFFF',
-            selectedButtonBackground: ['#5B5B5B', '#777777', '#3A3A3A'],
-            outputBackground: '#2E2E2E',
-            actionButtonBackground: '#444444',
-            themeButtonBackground: '#555555', // Cor de fundo para botões de tema
-            themeButtonTextColor: '#FFFFFF'   // Cor do texto para botões de tema
-        }
-    };
+  // Definição de temas
+  const themes = {
+    tema1: {
+      bodyBackground: '#1E1E1E',
+      textColor: '#FFFFFF',
+      buttonBackground: '#333333',
+      buttonTextColor: '#FFFFFF',
+      // buttonBorderWidth: "1px",
+      selectedButtonBackground: ['#5B5B5B', '#777777', '#3A3A3A'],
+      outputBackground: '#2E2E2E',
+      actionButtonBackground: '#444444',
+      themeButtonBackground: '#555555', // Cor de fundo para botões de tema
+      themeButtonTextColor: '#FFFFFF', // Cor do texto para botões de tema
+    },
+  };
 
-    // Função para aplicar um tema
-    function applyTheme(theme) {
-        document.body.style.backgroundColor = theme.bodyBackground;
-        document.body.style.color = theme.textColor;
-        
-        // Aplicando estilos aos botões de ação
-        buttons.forEach((button, index) => {
-            button.style.backgroundColor = theme.buttonBackground;
-            button.style.color = theme.buttonTextColor;
+  let currentTheme = themes.tema1; // Variável para armazenar o tema atual
 
-            // Atualiza cor de botão selecionado para cada categoria
-            if (button.classList.contains('selected')) {
-                button.style.backgroundColor = theme.selectedButtonBackground[index % theme.selectedButtonBackground.length];
-            }
-        });
+  // Função para aplicar um tema
+  function applyTheme(theme) {
+    document.body.style.backgroundColor = theme.bodyBackground;
+    document.body.style.color = theme.textColor;
 
-        // Aplicando estilo ao textarea de output
-        output.style.backgroundColor = theme.outputBackground;
+    // Aplicando estilos aos botões de ação
+    buttons.forEach((button, index) => {
+      button.style.backgroundColor = currentTheme.buttonBackground;
+      button.style.color = currentTheme.buttonTextColor;
+      button.style.borderWidth = currentTheme.buttonBorderWidth;
 
-        // Aplicando estilo aos botões de ação
-        copyButton.style.backgroundColor = theme.actionButtonBackground;
-        cutButton.style.backgroundColor = theme.actionButtonBackground;
-        clearButton.style.backgroundColor = theme.actionButtonBackground;
-
-        // Aplicando estilo aos botões de tema
-        themeButtons.forEach(button => {
-            button.style.backgroundColor = theme.themeButtonBackground;
-            button.style.color = theme.themeButtonTextColor;
-        });
-    }
-
-    // Função para salvar o tema selecionado no localStorage
-    function saveSelectedTheme(themeName) {
-        localStorage.setItem('selectedTheme', themeName);
-    }
-
-    // Função para carregar o tema salvo no localStorage
-    function loadSelectedTheme() {
-        const savedTheme = localStorage.getItem('selectedTheme');
-        if (savedTheme && themes[savedTheme]) {
-            applyTheme(themes[savedTheme]);
-        } else {
-            applyTheme(themes.tema1); // Aplica Tema 1 como padrão se nenhum tema estiver salvo
-        }
-    }
-
-    // Eventos para botões de tema
-    theme1Button.addEventListener("click", function() {
-        applyTheme(themes.tema1);
-        saveSelectedTheme('tema1');
+      // Atualiza cor de botão selecionado para cada categoria
+      if (button.classList.contains('selected')) {
+        button.style.backgroundColor = currentTheme.selectedButtonBackground[1];
+      }
     });
 
-    theme2Button.addEventListener("click", function() {
-        applyTheme(themes.tema2);
-        saveSelectedTheme('tema2');
-    });
+    // Aplicando estilo ao textarea de output
+    output.style.backgroundColor = currentTheme.outputBackground;
 
-    // Restante do código JavaScript existente
+    // Aplicando estilo aos botões de ação
+    copyButton.style.backgroundColor = currentTheme.actionButtonBackground;
+    cutButton.style.backgroundColor = currentTheme.actionButtonBackground;
+    clearButton.style.backgroundColor = currentTheme.actionButtonBackground;
+
+    
+  // Função de recortar com reaplicação de tema
+  cutButton.addEventListener('click', function () {
+    output.select();
+    document.execCommand('cut');
+    output.value = '';
+    clickedButtons = [];
     buttons.forEach(button => {
-        button.addEventListener("click", function() {
-            const buttonText = this.textContent;
-
-            if (this.classList.contains("selected")) {
-                this.classList.remove("selected");
-                this.style.backgroundColor = themes.tema1.buttonBackground; // Resetando a cor original
-                clickedButtons = clickedButtons.filter(text => text !== buttonText);
-            } else {
-                this.classList.add("selected");
-                this.style.backgroundColor = themes.tema1.selectedButtonBackground[clickedButtons.length % themes.tema1.selectedButtonBackground.length]; // Definindo a cor do botão selecionado
-                clickedButtons.push(buttonText);
-            }
-
-            output.value = clickedButtons.join(", ");
-        });
+      button.classList.remove('selected');
     });
 
-    copyButton.addEventListener("click", function() {
-        output.select();
-        document.execCommand("copy");
+    // Reaplicar o tema atual
+    applyTheme(currentTheme);
+  });
+
+  // Função de copiar
+  copyButton.addEventListener('click', function () {
+    output.select();
+    document.execCommand('copy');
+  });
+
+  // Função de limpar
+  clearButton.addEventListener('click', function () {
+    output.value = '';
+    clickedButtons = [];
+    buttons.forEach(button => {
+      button.classList.remove('selected');
     });
 
-    cutButton.addEventListener("click", function() {
-        output.select();
-        document.execCommand("cut");
-        output.value = "";
-        clickedButtons = [];
-        buttons.forEach(button => {
-            button.classList.remove("selected");
-            button.style.backgroundColor = themes.tema1.buttonBackground; // Resetando cor
-        });
-    });
+    // Reaplicar o tema atual após limpar
+    applyTheme(currentTheme);
+  });
 
-    clearButton.addEventListener("click", function() {
-        output.value = "";
-        clickedButtons = [];
-        buttons.forEach(button => {
-            button.classList.remove("selected");
-            button.style.backgroundColor = themes.tema1.buttonBackground; // Resetando cor
-        });
-    });
+  // Restante do código JavaScript existente para a seleção de botões
+  buttons.forEach(button => {
+    button.addEventListener('click', function () {
+      const buttonText = this.textContent;
 
-    // Carregar tema salvo ao carregar a página
-    loadSelectedTheme();
+      if (this.classList.contains('selected')) {
+        this.classList.remove('selected');
+        // this.style.borderWidth = "1px"
+        this.style.backgroundColor = themes[currentTheme].buttonBackground; // Resetando a cor original
+        clickedButtons = clickedButtons.filter(text => text !== buttonText);
+      } else {
+        this.classList.add('selected');
+        // this.style.borderWidth = "3px"
+        this.style.backgroundColor =
+        currentTheme.selectedButtonBackground[1]; // Definindo a cor do botão selecionado
+        clickedButtons.push(buttonText);
+      }
+
+      output.value = clickedButtons.join(',');
+    });
+  });
+
+  // Carregar tema ao carregar a página
+  applyTheme(currentTheme);
 });
