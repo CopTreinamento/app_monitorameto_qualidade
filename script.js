@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (this.classList.contains('selected')) {
         this.classList.remove('selected');
         // this.style.borderWidth = "1px"
-        this.style.backgroundColor = themes[currentTheme].buttonBackground; // Resetando a cor original
+        this.style.backgroundColor = currentTheme.buttonBackground; // Resetando a cor original
         clickedButtons = clickedButtons.filter(text => text !== buttonText);
       } else {
         this.classList.add('selected');
