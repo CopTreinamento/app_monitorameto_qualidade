@@ -1,1 +1,1 @@
-[App Link](https://app-monitoramento.netlify.app/)
+[App Link](https://app-monitoramentoqualidade.netlify.app/)
