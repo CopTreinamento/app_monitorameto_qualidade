@@ -78,7 +78,7 @@ button {
 
 /* Estilos para output e botões de ação permanecem os mesmos */
 #output {
-    width: 90%;
+    width: 98%;
     margin-top: 7px;
     box-sizing: border-box; /* Para incluir padding e bordas no cálculo da largura */
     color: yellow;
