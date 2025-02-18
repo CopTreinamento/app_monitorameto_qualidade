@@ -78,7 +78,7 @@ button {
 
 /* Estilos para output e botões de ação permanecem os mesmos */
 #output {
-    width: 90%;
+    width: 98%;
     margin-top: 7px;
     box-sizing: border-box; /* Para incluir padding e bordas no cálculo da largura */
     color: yellow;
@@ -91,7 +91,7 @@ button {
     margin-top: 7px;
     display: flex;
     gap: 10px;
-    max-width: 90%;
+    max-width: 98%;
 }
 
 #copyButton {
@@ -120,7 +120,7 @@ button {
     cursor: pointer;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     button {
         flex: 1 1 calc(50% - 6px); /* Permite até 2 botões por linha em telas menores */
     }
