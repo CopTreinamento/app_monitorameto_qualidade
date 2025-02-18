@@ -31,6 +31,7 @@ button {
     flex: 1 1 calc(33.333% - 10px); /* Permite até 3 botões por linha */
     min-width: 50%; /* Largura mínima dos botões */
     /* background-color: #E7F6F2; */
+    max-width: 50%;
     color: #EEE4B1;
     border: 1px solid #EEE4B1;
     padding: 3px;
